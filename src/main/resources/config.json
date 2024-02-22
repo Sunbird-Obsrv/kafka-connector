@@ -1,0 +1,23 @@
+{
+  "type": "connector",
+  "metadata": {
+    "id": "kafka-connector",
+    "name": "Kafka Connector",
+    "type": "source",
+    "category": "Stream",
+    "description": "Pull data from a kafka source",
+    "technology": "scala",
+    "licence": "MIT",
+    "owner": "Sunbird",
+    "icon": ""
+  },
+  "source": {
+    "kafka": {
+      "broker-servers": "",
+      "topic": "",
+      "auto-offset-reset": "",
+      "consumer-id": ""
+    },
+    "data-format": "json"
+  }
+}

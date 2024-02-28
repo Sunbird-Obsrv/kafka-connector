@@ -12,6 +12,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.apache.flink.util.Collector
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, OffsetResetStrategy}
 import org.json.{JSONException, JSONObject}
+import org.sunbird.obsrv.connector.model.Models
 import org.sunbird.obsrv.connector.source.{IConnectorSource, SourceConnector, SourceConnectorFunction}
 import org.sunbird.obsrv.job.exception.UnsupportedDataFormatException
 import org.sunbird.obsrv.job.model.Models.ErrorData
@@ -22,7 +23,7 @@ import java.util.Properties
 object KafkaConnector {
 
   def main(args: Array[String]): Unit = {
-    SourceConnector.process(args, new KafkaConnectorSource, new KafkaConnectorFunction)
+    SourceConnector.process(args, new KafkaConnectorSource)
   }
 }
 
@@ -53,10 +54,17 @@ class KafkaConnectorSource extends IConnectorSource {
   override def getSourceStream(env: StreamExecutionEnvironment, config: Config): SingleOutputStreamOperator[String] = {
     env.fromSource(kafkaSource(config), WatermarkStrategy.noWatermarks[String](), config.getString("source.kafka.consumer-id")).uid(config.getString("source.kafka.consumer-id"))
   }
+
+  override def getSourceFunction(contexts: List[Models.ConnectorContext]): SourceConnectorFunction = {
+    new KafkaConnectorFunction(contexts)
+  }
 }
 
-class KafkaConnectorFunction extends SourceConnectorFunction {
-  override def processEvent(event: String, onSuccess: String => Unit, onFailure: (String, ErrorData) => Unit): Unit = {
+class KafkaConnectorFunction(contexts: List[Models.ConnectorContext]) extends SourceConnectorFunction(contexts) {
+
+  override def getMetrics(): List[String] = List[String]()
+
+  override def processEvent(event: String, onSuccess: String => Unit, onFailure: (String, ErrorData) => Unit, incMetric: (String, Long) => Unit): Unit = {
 
     if (event == null) {
       onFailure(event, ErrorData("EMPTY_JSON_EVENT", "Event data is null or empty"))
@@ -77,6 +85,7 @@ class KafkaConnectorFunction extends SourceConnectorFunction {
         false
     }
   }
+
 }
 
 class StringDeserializationSchema extends KafkaRecordDeserializationSchema[String] {

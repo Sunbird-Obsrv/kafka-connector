@@ -9,7 +9,8 @@
     "technology": "scala",
     "licence": "MIT",
     "owner": "Sunbird",
-    "icon": ""
+    "icon": "",
+    "mainClass": "org.sunbird.obsrv.connector.KafkaConnector"
   },
   "source": {
     "kafka": {

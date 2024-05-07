@@ -54,7 +54,23 @@
             <groupId>org.sunbird.obsrv.connector</groupId>
             <artifactId>connector-sdk-flink</artifactId>
             <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-clients</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.kafka</groupId>
+                    <artifactId>kafka-clients</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.8.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka</artifactId>
@@ -167,7 +183,8 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.sunbird.obsrv.connector.task.KafkaConnectorStreamTask</mainClass>
+                                    <!-- <mainClass>org.sunbird.obsrv.connector.task.KafkaConnectorStreamTask</mainClass> -->
+                                    <mainClass>org.sunbird.obsrv.connector.KafkaConnector</mainClass>
                                 </transformer>
                                 <!-- append default configs -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">

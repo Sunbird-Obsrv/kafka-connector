@@ -91,9 +91,9 @@ class KafkaConnectorFunction(contexts: List[Models.ConnectorContext]) extends So
 class StringDeserializationSchema extends KafkaRecordDeserializationSchema[String] {
   private val serialVersionUID = -3224825136576915426L
 
-  def getProducedType: TypeInformation[String] = TypeExtractor.getForClass(classOf[String])
+  override def getProducedType: TypeInformation[String] = TypeExtractor.getForClass(classOf[String])
 
-  def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]], out: Collector[String]): Unit = {
+  override def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]], out: Collector[String]): Unit = {
     out.collect(new String(record.value(), StandardCharsets.UTF_8))
   }
 }

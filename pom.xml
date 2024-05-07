@@ -65,7 +65,17 @@
             <artifactId>json</artifactId>
             <version>20240205</version>
         </dependency>
-        <!-- 
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients</artifactId>
+            <version>1.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+        <!--
         <dependency>
             <groupId>org.sunbird.obsrv.connector</groupId>
             <artifactId>connector-sdk-flink</artifactId>

@@ -31,7 +31,7 @@ class KafkaConnectorSource extends IConnectorSource {
 
   private def kafkaConsumerProperties(config: Config): Properties = {
     val properties = new Properties()
-    properties.setProperty("bootstrap.servers", config.getString("source.kafka.consumer.broker-servers"))
+    properties.setProperty("bootstrap.servers", config.getString("source.kafka.broker-servers"))
     properties.setProperty("group.id", config.getString("source.kafka.consumer-id"))
     properties.setProperty(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed")
     properties.setProperty("auto.offset.reset", config.getString("source.kafka.auto-offset-reset"))
@@ -89,12 +89,11 @@ class KafkaConnectorFunction(contexts: List[Models.ConnectorContext]) extends So
 }
 
 class StringDeserializationSchema extends KafkaRecordDeserializationSchema[String] {
-
   private val serialVersionUID = -3224825136576915426L
 
-  override def getProducedType: TypeInformation[String] = TypeExtractor.getForClass(classOf[String])
+  def getProducedType: TypeInformation[String] = TypeExtractor.getForClass(classOf[String])
 
-  override def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]], out: Collector[String]): Unit = {
+  def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]], out: Collector[String]): Unit = {
     out.collect(new String(record.value(), StandardCharsets.UTF_8))
   }
 }

@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Kafka Connector</name>
     <description>
-        Reads data from source kafka topic(s) and writes them to a configurable topic
+        Reads data from source kafka topic(s)
     </description>
 
     <properties>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>2.8.1</version>
+            <version>${kafka.version}</version>
         </dependency>
 
         <dependency>
@@ -84,22 +84,13 @@
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients</artifactId>
-            <version>1.15.2</version>
+            <version>${flink.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.15.2</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.sunbird.obsrv.connector</groupId>
-            <artifactId>connector-sdk-flink</artifactId>
-            <version>1.0.0</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -111,9 +102,54 @@
             <version>2.12.7</version>
         </dependency>
         <dependency>
+            <groupId>org.sunbird.obsrv.connector</groupId>
+            <artifactId>connector-sdk-flink</artifactId>
+            <version>1.0.0</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_2.12</artifactId>
             <version>3.0.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.embeddedkafka</groupId>
+            <artifactId>embedded-kafka_2.12</artifactId>
+            <version>3.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-test-utils</artifactId>
+            <version>${flink.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-runtime</artifactId>
+            <version>${flink.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java</artifactId>
+            <version>${flink.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_${scala.maj.version}</artifactId>
+            <version>${kafka.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.zonky.test</groupId>
+            <artifactId>embedded-postgres</artifactId>
+            <version>2.0.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -240,7 +276,7 @@
                 <configuration>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                     <junitxml>.</junitxml>
-                    <filereports>dp-duplication-testsuite.txt</filereports>
+                    <filereports>kafka-connector-testsuite.txt</filereports>
                 </configuration>
                 <executions>
                     <execution>

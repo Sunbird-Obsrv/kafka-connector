@@ -31,20 +31,20 @@ class KafkaConnectorSource extends IConnectorSource {
 
   private def kafkaConsumerProperties(config: Config): Properties = {
     val properties = new Properties()
-    properties.setProperty("bootstrap.servers", config.getString("source.kafka.broker-servers"))
-    properties.setProperty("group.id", config.getString("source.kafka.consumer-id"))
+    properties.setProperty("bootstrap.servers", config.getString("source_kafka_broker_servers"))
+    properties.setProperty("group.id", config.getString("source_kafka_consumer_id"))
     properties.setProperty(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed")
-    properties.setProperty("auto.offset.reset", config.getString("source.kafka.auto-offset-reset"))
+    properties.setProperty("auto.offset.reset", config.getString("source_kafka_auto_offset_reset"))
     properties
   }
 
   private def kafkaSource(config: Config): KafkaSource[String] = {
-    val dataFormat = config.getString("source.data-format")
-    if(!"json".equals(config.getString("source.data-format"))) {
+    val dataFormat = config.getString("source_data_format")
+    if(!"json".equals(config.getString("source_data_format"))) {
       throw new UnsupportedDataFormatException(dataFormat)
     }
     KafkaSource.builder[String]()
-      .setTopics(config.getString("source.kafka.topic"))
+      .setTopics(config.getString("source_kafka_topic"))
       .setDeserializer(new StringDeserializationSchema)
       .setProperties(kafkaConsumerProperties(config))
       .setStartingOffsets(OffsetsInitializer.committedOffsets(OffsetResetStrategy.EARLIEST))
@@ -52,7 +52,7 @@ class KafkaConnectorSource extends IConnectorSource {
   }
 
   override def getSourceStream(env: StreamExecutionEnvironment, config: Config): SingleOutputStreamOperator[String] = {
-    env.fromSource(kafkaSource(config), WatermarkStrategy.noWatermarks[String](), config.getString("source.kafka.consumer-id")).uid(config.getString("source.kafka.consumer-id"))
+    env.fromSource(kafkaSource(config), WatermarkStrategy.noWatermarks[String](), config.getString("source_kafka_consumer_id")).uid(config.getString("source_kafka_consumer_id"))
   }
 
   override def getSourceFunction(contexts: List[Models.ConnectorContext]): SourceConnectorFunction = {

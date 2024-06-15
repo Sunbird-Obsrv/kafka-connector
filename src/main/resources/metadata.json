@@ -1,17 +1,17 @@
 {
   "type": "connector",
   "metadata": {
-    "id": "stream-connector",
-    "name": "Stream Connector",
+    "id": "kafka-connector",
+    "name": "Kafka Connector",
     "type": "source",
     "tenant": "single",
     "category": "Stream",
-    "description": "Pull data from a streaming source",
+    "description": "Pull data from a Kafka Source",
     "technology": "scala",
     "runtime": "flink",
     "licence": "MIT",
     "owner": "Sunbird",
-    "main_class": "org.sunbird.kafka.connector.KafkaConnector",
+    "main_class": "org.sunbird.obsrv.connector.KafkaConnector",
     "main_program": "kafka-connector-1.0.0.jar"
   },
   "connectors": [

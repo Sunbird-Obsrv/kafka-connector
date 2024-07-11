@@ -1,0 +1,74 @@
+{
+  "kafka-connector": {
+    "schema": {
+      "title": "Connector Config",
+      "type": "object",
+      "properties": {
+        "source": {
+          "title": "Storage Source",
+          "type": "object",
+          "properties": {
+            "kafkaBrokerServers": {
+              "title": "Kafka Broker Server",
+              "type": "string",
+              "fieldDescription": [{
+                "type": "string",
+                "description": "Select polling interval"
+              }]
+            },
+            "kafkaTopic": {
+              "title": "Kafka Topic",
+              "type": "string",
+              "fieldDescription": [{
+                "type": "string",
+                "description": "Enter a valid kafka topic."
+              }]
+            },
+            "kafkaAutoOffsetReset": {
+              "title": "Kafka Auto Offset Reset",
+              "type": "string",
+              "fieldDescription": [{
+                "type": "string",
+                "description": "Select suitable offset."
+              }],
+              "enum": ["EARLIEST", "LATEST", "NONE"]
+            },
+            "kafkaConsumerId": {
+              "title": "Kafka Consumer Id",
+              "type": "string",
+              "fieldDescription": [{
+                "type": "string",
+                "description": "Select suitable offset."
+              }]
+            },
+            "dataFormat": {
+              "title": "Data Format",
+              "type": "string",
+              "fieldDescription": [{
+                "type": "string",
+                "description": "Select suitable data format."
+              }],
+              "enum": [
+                "jsonl",
+                "csv",
+                "parquet",
+                "avro"
+              ]
+            }
+          }
+        }
+      },
+      "required": ["source"]
+    },
+    "properties": {
+      "operations_config": {
+        "batch_size": {
+          "ui:readonly": true
+        },
+        "max_batches": {
+          "ui:readonly": true
+        }
+      }
+    }
+    }
+}

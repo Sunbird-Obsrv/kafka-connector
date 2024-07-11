@@ -8,7 +8,7 @@
           "title": "Storage Source",
           "type": "object",
           "properties": {
-            "kafkaBrokerServers": {
+            "kafka-broker-servers": {
               "title": "Kafka Broker Server",
               "type": "string",
               "fieldDescription": [{
@@ -16,7 +16,7 @@
                 "description": "Select polling interval"
               }]
             },
-            "kafkaTopic": {
+            "kafka-topic": {
               "title": "Kafka Topic",
               "type": "string",
               "fieldDescription": [{
@@ -24,7 +24,7 @@
                 "description": "Enter a valid kafka topic."
               }]
             },
-            "kafkaAutoOffsetReset": {
+            "kafka-auto-offset-reset": {
               "title": "Kafka Auto Offset Reset",
               "type": "string",
               "fieldDescription": [{
@@ -33,7 +33,7 @@
               }],
               "enum": ["EARLIEST", "LATEST", "NONE"]
             },
-            "kafkaConsumerId": {
+            "kafka-consumer-id": {
               "title": "Kafka Consumer Id",
               "type": "string",
               "fieldDescription": [{
@@ -41,7 +41,7 @@
                 "description": "Select suitable offset."
               }]
             },
-            "dataFormat": {
+            "data-format": {
               "title": "Data Format",
               "type": "string",
               "fieldDescription": [{

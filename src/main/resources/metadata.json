@@ -5,6 +5,8 @@
     "name": "Kafka Connector",
     "type": "source",
     "tenant": "single",
+    "version": "1.0.0",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Apache_kafka-icon.svg/64px-Apache_kafka-icon.svg.png",
     "category": "Stream",
     "description": "Pull data from a Kafka Source",
     "technology": "scala",
@@ -13,25 +15,5 @@
     "owner": "Sunbird",
     "main_class": "org.sunbird.obsrv.connector.KafkaConnector",
     "main_program": "kafka-connector-1.0.0.jar"
-  },
-  "connectors": [
-    {
-      "name": "Kafka Connector",
-      "id": "kafka-connector",
-      "description": "The Kafka Connector is used to move data from any Kafka topic to the Obsrv platform",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Apache_kafka-icon.svg/64px-Apache_kafka-icon.svg.png",
-      "config": {
-        "source": {
-          "kafka": {
-            "broker-servers": "",
-            "topic": "",
-            "auto-offset-reset": "",
-            "consumer-id": ""
-          }
-        },
-        "data-format": "json"
-      },
-      "uiConfigPath": "ui_config[]"
-    }
-  ]
+  }
 }

@@ -1,5 +1,4 @@
 {
-  "kafka-connector": {
     "schema": {
       "title": "Connector Config",
       "type": "object",
@@ -13,7 +12,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^(?:[0-9]{1,3}(?:\\.[0-9]{1,3}){3}|[a-zA-Z0-9\\-\\.]+)(?::[0-9]{1,5})?$",
+                "pattern": "",
                 "description": "Enter Kafka broker address in the format: host[:port]"
               },
               "minItems": 1,
@@ -54,18 +53,6 @@
                 "type": "string",
                 "description": "Select suitable offset."
               }]
-            },
-            "data-format": {
-              "title": "Data Format",
-              "type": "string",
-              "fieldDescription": [{
-                "type": "string",
-                "description": "Select suitable data format."
-              }],
-              "enum": [
-                "jsonl"
-              ],
-              "default": "jsonl"
             }
           }
         }
@@ -73,5 +60,4 @@
       "required": ["source"]
     },
     "properties": {}
-  }
 }

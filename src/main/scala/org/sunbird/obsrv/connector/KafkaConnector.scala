@@ -55,7 +55,7 @@ class KafkaConnectorSource extends IConnectorSource {
     env.fromSource(kafkaSource(config), WatermarkStrategy.noWatermarks[String](), config.getString("source_kafka_consumer_id")).uid(config.getString("source_kafka_consumer_id"))
   }
 
-  override def getSourceFunction(contexts: List[Models.ConnectorContext]): SourceConnectorFunction = {
+  override def getSourceFunction(contexts: List[Models.ConnectorContext], config: Config): SourceConnectorFunction = {
     new KafkaConnectorFunction(contexts)
   }
 }

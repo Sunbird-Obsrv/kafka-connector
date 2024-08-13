@@ -33,10 +33,4 @@
             </includes>
         </fileSet>
     </fileSets>
-    <dependencySets>
-        <dependencySet>
-            <outputDirectory>libs</outputDirectory>
-            <useTransitiveFiltering>true</useTransitiveFiltering>
-        </dependencySet>
-    </dependencySets>
 </assembly>
